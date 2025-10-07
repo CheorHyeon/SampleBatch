@@ -64,4 +64,19 @@ public class MainController {
 
 	}
 
+	@GetMapping("/fifth")
+	public String fifthApi(@RequestParam("value") String value) throws Exception {
+
+		// 겹치는 일자가 들어오면 실행시키지 않게 하기 위해 값을 줌
+		JobParameters jobParameters = new JobParametersBuilder()
+			.addString("date", value)
+			.toJobParameters();
+
+		// 비동기로 실행해보면 좋으나, 배치 작업이 실행 되는지 봐야하니 동기로
+		jobLauncher.run(jobRegistry.getJob("fifthJob"), jobParameters);
+
+		return "ok";
+
+	}
+
 }
