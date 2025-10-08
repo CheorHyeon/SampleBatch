@@ -84,8 +84,7 @@ public class ExcelRowReader implements ItemStreamReader<Row> {
 		}
 	}
 
-	/** read가 처리되고 나서 특정 변수값 update 등 세팅(매번 호출) */
-
+	/** 하나의 chunk 단위가 처리되어 commit된 이후 context에 특정 변수값 세팅(commit 이후 매번 호출) */
 	@Override
 	public void update(ExecutionContext executionContext) throws ItemStreamException {
 		executionContext.putInt(CURRENT_ROW_KEY, currentRowNumber);
